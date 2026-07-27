@@ -20,8 +20,7 @@ Live demo: _add your Render URL here once deployed_
 | Hosting | Render (free web service) | No credit card, live public URL, auto-deploy from GitHub |
 
 Full reasoning for each choice, plus trade-offs and assumptions, is in
-[`DECISION_LOG.md`](./DECISION_LOG.md). The Gemini migration specifically is
-covered in [`GEMINI_MIGRATION.md`](./GEMINI_MIGRATION.md).
+[`DECISION_LOG.md`](./DECISION_LOG.md). 
 
 ---
 
@@ -39,7 +38,6 @@ covered in [`GEMINI_MIGRATION.md`](./GEMINI_MIGRATION.md).
 ├── .env.example           # Copy to .env and fill in real values
 ├── .gitignore              # Excludes .env from version control
 ├── DECISION_LOG.md          # Assumptions, trade-offs, what to do with more time
-├── GEMINI_MIGRATION.md       # Claude → Gemini swap notes
 └── README.md                  # This file
 ```
 
@@ -155,7 +153,7 @@ Then fill in `.env`:
 
 **Never commit `.env`** — it's already covered by `.gitignore`.
 
-### 5. Run the server
+### 5. Run the server(For testing run locally first later deployed on Render)
 ```
 uvicorn main:app --reload
 ```
@@ -212,6 +210,7 @@ agent end-to-end:
    **Environment** tab.
 5. Deploy — you get a public URL. Every push to the connected branch
    auto-redeploys.
+6.The API keys are manually entered in environment tab and not exposed anywhere in the code.
 
 Render's free tier sleeps after 15 minutes of inactivity (cold start ~30–60s
 on the next request) — the frontend's cold-start warning message handles
@@ -231,6 +230,4 @@ See `DECISION_LOG.md` for full reasoning. Summary:
   the client.
 - No auth on the `/chat` endpoint — acceptable for a demo link, not for
   anything beyond.
-- "Leadership updates" (from the task description) was interpreted as an
-  answer-style requirement (see system prompt above), not a separate
-  feature — deliberate scope cut, documented in `DECISION_LOG.md`.
+-The HTML front is very simplistic. Can be improved significantly.
